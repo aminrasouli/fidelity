@@ -62,6 +62,7 @@ export default function Search() {
                     label="Search for a movie, tv show..."
                     InputProps={{
                         ...params.InputProps,
+                        autoFocus: true,
                         endAdornment: (
                             <>
                                 {loading ? <CircularProgress color="inherit" size={20}/> : null}

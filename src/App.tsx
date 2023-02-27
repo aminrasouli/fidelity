@@ -1,37 +1,16 @@
-import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LocalMoviesSharpIcon from '@mui/icons-material/LocalMoviesSharp';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
-import Search from "./Search";
+import {ThemeProvider} from '@mui/material/styles';
 import {Button, ButtonGroup, ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {Theme} from "@emotion/react";
-
-function Copyright(props: any): JSX.Element {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="/">
-                Fidelity
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-const theme: Theme = createTheme();
-
-const darkTheme: Theme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-});
+import Search from "./views/components/Search";
+import {getTheme} from "./theme";
+import {useTheme} from "./hooks";
+import Copyright from "./views/components/Copyright";
 
 export function ThemeSelectorButtons({dark, onChange}: { dark: boolean, onChange: () => void }): JSX.Element {
     return (
@@ -87,10 +66,10 @@ export function Header(): JSX.Element {
 }
 
 export default function App(): JSX.Element {
-    const [isDark, setIsDark] = useState<boolean>(true)
+    const {isDark, handleThemeChange} = useTheme();
 
     return (
-        <ThemeProvider theme={isDark ? darkTheme : theme}>
+        <ThemeProvider theme={getTheme(isDark)}>
             <Container component="main" maxWidth="xs" sx={{
                 minHeight: '80vh',
                 display: 'flex',
@@ -118,10 +97,10 @@ export default function App(): JSX.Element {
                     </Box>
                 </Box>
                 <Grid container spacing={2} mt={2}>
-                    <ThemeSelectorButtons dark={isDark} onChange={() => setIsDark(!isDark)}/>
+                    <ThemeSelectorButtons dark={isDark} onChange={handleThemeChange}/>
                     <SavedListButtons/>
                 </Grid>
-                <Copyright sx={{mt: 8, mb: 4}}/>
+                <Copyright/>
             </Container>
         </ThemeProvider>
     );
