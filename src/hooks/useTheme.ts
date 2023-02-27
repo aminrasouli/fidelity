@@ -1,16 +1,18 @@
-import {useEffect, useState} from "react";
+import {useContext, useLayoutEffect} from "react";
+import {ThemeContext} from "../theme/context/themeContext";
+import storage from "../utils/storage";
 
 const useTheme = () => {
-    const [isDark, setIsDark] = useState<boolean>(true)
+    const {isDark, setIsDark} = useContext(ThemeContext);
 
-    useEffect(() => {
-        const existingPreference = localStorage.getItem("theme");
-        existingPreference && setIsDark(existingPreference === "dark");
-    }, []);
+    useLayoutEffect(() => {
+        const existingPreference = storage.get("theme");
+        existingPreference && setIsDark(storage.isEqual("theme", "dark"));
+    }, [setIsDark]);
 
     const handleThemeChange = () => {
         const newTheme = isDark ? "light" : "dark";
-        localStorage.setItem("theme", newTheme);
+        storage.set("theme", newTheme);
         setIsDark(!isDark);
     };
 

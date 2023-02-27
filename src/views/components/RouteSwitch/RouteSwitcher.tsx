@@ -1,5 +1,7 @@
 import React, {ComponentType, FC, lazy, Suspense} from 'react'
 import {Navigate, Route, Routes} from 'react-router-dom'
+import {Backdrop} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export interface RouteType {
     path: `/${string}`
@@ -10,9 +12,18 @@ export interface RouteSwitcherProps extends React.HTMLAttributes<HTMLDivElement>
     routes: Record<string, RouteType>
 }
 
+const Loading = () => (
+    <Backdrop
+        sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+        open
+    >
+        <CircularProgress color="inherit"/>
+    </Backdrop>
+)
+
 const RouteSwitcher: FC<RouteSwitcherProps> = ({routes, children}) => {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading/>}>
             <Routes>
                 {Object.keys(routes).map((key) => {
                     const {path, component} = routes[key]

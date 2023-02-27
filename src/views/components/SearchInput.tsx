@@ -1,7 +1,9 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
-import {useEffect, useState} from 'react';
+import {FormEvent, useEffect, useState} from 'react';
+import useSearchQueryParams from "../../hooks/useSearchQueryParams";
+import useDebounce from "../../hooks/useDebounce";
 
 interface Film {
     title: string;
@@ -15,9 +17,17 @@ function sleep(delay = 0) {
 }
 
 export default function SearchInput() {
+    const {searchQuery, submitSearchQuery} = useSearchQueryParams()
+
+    const [inputValue, setInputValue] = useState('');
+    const debouncedInputValue: string = useDebounce(inputValue, 400)
+
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState<readonly Film[]>([]);
     const loading = open && options.length === 0;
+
+    const isSubmittable: boolean = !!inputValue && inputValue !== searchQuery &&
+        inputValue.trim().length > 0
 
     useEffect(() => {
         let active = true;
@@ -46,33 +56,45 @@ export default function SearchInput() {
     }, [open]);
 
     return (
-        <Autocomplete
-            id="asynchronous-demo"
-            sx={{width: '35vw', minWidth: '350px'}}
-            open={open}
-            onOpen={() => setOpen(true)}
-            onClose={() => setOpen(false)}
-            isOptionEqualToValue={(option, value) => option.title === value.title}
-            getOptionLabel={(option) => option.title}
-            options={options}
-            loading={loading}
-            renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label="Search for a movie, tv show..."
-                    InputProps={{
-                        ...params.InputProps,
-                        autoFocus: true,
-                        endAdornment: (
-                            <>
-                                {loading ? <CircularProgress color="inherit" size={20}/> : null}
-                                {params.InputProps.endAdornment}
-                            </>
-                        ),
-                    }}
-                />
-            )}
-        />
+        <form
+            onSubmit={(e: FormEvent<HTMLFormElement>): void => {
+                e.preventDefault()
+                if (!isSubmittable) return;
+                submitSearchQuery(inputValue)
+            }}
+        >
+            <Autocomplete
+                id="asynchronous-demo"
+                sx={{width: '35vw', minWidth: '350px'}}
+                open={open}
+                onOpen={() => setOpen(true)}
+                onClose={() => setOpen(false)}
+                isOptionEqualToValue={(option, value) => option.title === value.title}
+                getOptionLabel={(option) => option.title}
+                options={options}
+                loading={loading}
+                onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue)
+                }}
+                onChange={(e, value) => submitSearchQuery((value as Film).title)}
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label="Search for a movie, tv show..."
+                        InputProps={{
+                            ...params.InputProps,
+                            autoFocus: true,
+                            endAdornment: (
+                                <>
+                                    {loading ? <CircularProgress color="inherit" size={20}/> : null}
+                                    {params.InputProps.endAdornment}
+                                </>
+                            ),
+                        }}
+                    />
+                )}
+            />
+        </form>
     );
 }
 
