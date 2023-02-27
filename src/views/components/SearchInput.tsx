@@ -14,7 +14,7 @@ function sleep(delay = 0) {
     });
 }
 
-export default function Search() {
+export default function SearchInput() {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState<readonly Film[]>([]);
     const loading = open && options.length === 0;

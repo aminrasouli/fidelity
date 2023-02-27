@@ -5,10 +5,10 @@ const routes: Record<string, RouteType> = {
         path: '/',
         component: () => import('../pages/Home/Home'),
     },
-    // search: {
-    //     path: '/search',
-    //     component: () => import('views/pages/Home'),
-    // },
+    search: {
+        path: '/search',
+        component: () => import('../pages/Search/Search'),
+    },
     // favorites: {
     //     path: '/favorites',
     //     component: () => import('views/pages/Home'),
