@@ -1,26 +1,29 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import storage from '../../../utils/storage';
-import { useManyMovies } from '../../../api/movies/movies';
-import { DataGrid } from '@mui/x-data-grid';
-import movieColumns from './columns/movie.columns';
+import * as React from "react";
+import { useState } from "react";
+import storage from "../../../utils/storage";
+import { useManyMovies } from "../../../api/movies/movies";
+import { DataGrid } from "@mui/x-data-grid";
+import movieColumns from "./columns/movie.columns";
+import { SavedList } from "../../../api/libs/savedList";
 
 export default function FavoriteMoviesTable() {
-	const [movieIds] = useState(storage.get('favorite'));
+  const [movieIds, setMovieIds] = useState(storage.get(SavedList.Favorite));
 
-	const { data, isFetching } = useManyMovies({ movieIds });
+  const { data, isFetching, refetch } = useManyMovies({ movieIds });
 
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
-
-	return (
-		<DataGrid
-			loading={isFetching}
-			rows={data?.items ?? []}
-			columns={movieColumns}
-			autoHeight
-			rowHeight={185}
-		/>
-	);
+  return (
+    <DataGrid
+      loading={isFetching}
+      rows={data?.items ?? []}
+      columns={movieColumns}
+      autoHeight
+      rowHeight={185}
+      onRowClick={(params) => {
+        if (!storage.isInArray(SavedList.Watch, params.id)) {
+          setMovieIds(storage.get(SavedList.Watch));
+          refetch().then(() => {});
+        }
+      }}
+    />
+  );
 }
