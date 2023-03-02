@@ -1,9 +1,8 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import ImagesList from "./ImagesList";
+import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const style = {
   position: "absolute" as "absolute",
@@ -17,21 +16,30 @@ const style = {
   p: 4,
 };
 
-export default function ImagesModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+export default function ImagesModal({
+  movieId,
+  open,
+  setOpen,
+}: {
+  movieId: number;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}) {
   const handleClose = () => setOpen(false);
 
   return (
     <div>
       <Modal
-        open={true}
+        open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ImagesList />
+          <IconButton aria-label="close" onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+          <ImagesList {...{ movieId }} />
         </Box>
       </Modal>
     </div>

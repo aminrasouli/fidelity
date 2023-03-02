@@ -1,4 +1,4 @@
-import { Button, Grid, Modal } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import storage from "../../utils/storage";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { SavedList } from "../../api/libs/savedList";
 import ImagesModal from "./ImagesModal";
+import VideosModal from "./VideosModal";
 
 export function Action({ title, movieId }: { title: string; movieId: number }) {
   const { enqueueSnackbar } = useSnackbar();
@@ -19,6 +20,9 @@ export function Action({ title, movieId }: { title: string; movieId: number }) {
   const [watch, setWatch] = useState(
     storage.isInArray(SavedList.Watch, movieId)
   );
+
+  const [openImageModel, setOpenImageModel] = useState(false);
+  const [openVideoModal, setOpenVideoModal] = useState(false);
 
   const handleFavoriteClick = () => {
     const message = !favorite
@@ -71,22 +75,37 @@ export function Action({ title, movieId }: { title: string; movieId: number }) {
               variant="outlined"
               size="small"
               color="info"
+              onClick={() => setOpenImageModel(true)}
               startIcon={<InsertPhotoIcon />}
             >
               Photos
             </Button>
           </Grid>
+          <ImagesModal
+            {...{
+              movieId,
+              open: openImageModel,
+              setOpen: setOpenImageModel,
+            }}
+          />
           <Grid item>
             <Button
               variant="outlined"
               size="small"
               color="primary"
+              onClick={() => setOpenVideoModal(true)}
               startIcon={<SlideshowIcon />}
             >
               Trailer
             </Button>
           </Grid>
-          <ImagesModal />
+          <VideosModal
+            {...{
+              movieId,
+              open: openVideoModal,
+              setOpen: setOpenVideoModal,
+            }}
+          />
         </Grid>
       </Grid>
     </Grid>

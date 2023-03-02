@@ -2,14 +2,12 @@ import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useMovieImages } from "../../api/movies/movies";
-import storage from "../../utils/storage";
-import { SavedList } from "../../api/libs/savedList";
 import Box from "@mui/material/Box";
 
-export default function imagesList() {
-  const { data } = useMovieImages({
-    movieId: storage.get(SavedList.Watch)[0],
-  });
+export default function imagesList({ movieId }: { movieId: number }) {
+  const { data } = useMovieImages({ movieId });
+
+  console.log(data);
 
   return (
     <>
