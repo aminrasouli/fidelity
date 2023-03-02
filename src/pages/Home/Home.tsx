@@ -1,15 +1,15 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import SearchInput from "../../views/components/SearchInput";
-import Copyright from "../../views/layout/Copyright";
-import { useTheme } from "../../hooks";
-import { Header } from "../../views/layout/Header";
-import { ThemeSelectorButtons } from "../../theme/components/ThemeSelector";
-import { ButtonLists } from "../../views/components/ButtonLists";
-import BaseContainer from "../../views/layout/BaseContainer";
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import SearchInput from '../../views/components/SearchInput'
+import Copyright from '../../views/layout/Copyright'
+import { useTheme } from '../../hooks'
+import { Header } from '../../views/layout/Header'
+import { ThemeSelectorButtons } from '../../theme/components/ThemeSelector'
+import { ButtonLists } from '../../views/components/ButtonLists'
+import BaseContainer from '../../views/layout/BaseContainer'
 
 const Home: () => JSX.Element = () => {
-  const { isDark, handleThemeChange } = useTheme();
+  const { isDark, handleThemeChange } = useTheme()
 
   return (
     <BaseContainer>
@@ -22,7 +22,7 @@ const Home: () => JSX.Element = () => {
         spacing={2}
         mt={1}
         sx={{
-          justifyContent: "center",
+          justifyContent: 'center',
         }}
       >
         <ThemeSelectorButtons dark={isDark} onChange={handleThemeChange} />
@@ -30,7 +30,7 @@ const Home: () => JSX.Element = () => {
       </Grid>
       <Copyright />
     </BaseContainer>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

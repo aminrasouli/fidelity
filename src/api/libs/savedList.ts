@@ -1,5 +1,5 @@
 export enum SavedList {
-  Watch = "watch",
+  Watch = 'watch',
 
-  Favorite = "favorite",
+  Favorite = 'favorite',
 }

@@ -1,3 +1,3 @@
-export { default as useTheme } from './useTheme';
-export { default as useDebounce } from './useDebounce';
-export { default as useSearchQueryParams } from './useSearchQueryParams';
+export { default as useTheme } from './useTheme'
+export { default as useDebounce } from './useDebounce'
+export { default as useSearchQueryParams } from './useSearchQueryParams'

@@ -1,68 +1,63 @@
-import { GridColDef } from "@mui/x-data-grid";
-import moment from "moment/moment";
-import { Grid } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Action } from "../../Actions";
-import Typography from "@mui/material/Typography";
-import * as React from "react";
-import StyledRating from "../components/StyledRating";
+import { GridColDef } from '@mui/x-data-grid'
+import moment from 'moment/moment'
+import { Grid } from '@mui/material'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import { Action } from '../../Actions'
+import Typography from '@mui/material/Typography'
+import * as React from 'react'
+import StyledRating from '../components/StyledRating'
 
 const movieColumns: GridColDef[] = [
   {
-    field: "poster",
-    headerName: "Poster",
+    field: 'poster',
+    headerName: 'Poster',
     sortable: false,
     width: 100,
     renderCell: (params) => (
-      <img
-        src={`${params.value}`}
-        width="85px"
-        loading="lazy"
-        alt={params.row.title}
-      />
+      <img src={`${params.value}`} width='85px' loading='lazy' alt={params.row.title} />
     ),
     filterable: false,
   },
   {
-    field: "year",
-    headerName: "Year",
+    field: 'year',
+    headerName: 'Year',
     width: 55,
   },
   {
-    field: "lang",
-    headerName: "Lang",
+    field: 'lang',
+    headerName: 'Lang',
     width: 55,
     sortable: false,
   },
   {
-    field: "title",
-    headerName: "Title",
+    field: 'title',
+    headerName: 'Title',
     width: 250,
     sortable: false,
   },
   {
-    field: "date",
-    headerName: "Release Date",
+    field: 'date',
+    headerName: 'Release Date',
     valueFormatter: (params) => {
-      if (!params.value) return "";
-      return moment(params.value).format("LL");
+      if (!params.value) return ''
+      return moment(params.value).format('LL')
     },
     width: 155,
     sortComparator: (v1, v2) => moment(v1).diff(v2),
   },
   {
-    field: "vote_average",
-    headerName: "Ratings",
+    field: 'vote_average',
+    headerName: 'Ratings',
     renderCell: (params) => (
       <Grid container>
         <Grid item xs={12}>
           <StyledRating
             readOnly
-            icon={<FavoriteIcon fontSize="inherit" />}
-            emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+            icon={<FavoriteIcon fontSize='inherit' />}
+            emptyIcon={<FavoriteBorderIcon fontSize='inherit' />}
             value={params.row.voteAverage}
-            size="small"
+            size='small'
             max={10}
           />
         </Grid>
@@ -80,27 +75,27 @@ const movieColumns: GridColDef[] = [
   },
 
   {
-    field: "popularity",
-    headerName: "Actions",
+    field: 'popularity',
+    headerName: 'Actions',
     renderCell: ({ row }) => <Action title={row.title} movieId={row.id} />,
     sortable: false,
     width: 230,
     filterable: false,
   },
   {
-    field: "overview",
-    headerName: "Overview",
+    field: 'overview',
+    headerName: 'Overview',
     renderCell: (params) => (
       <Typography
-        variant="body2"
-        color="text.secondary"
+        variant='body2'
+        color='text.secondary'
         noWrap
         sx={{
-          whiteSpace: "normal",
-          wordWrap: "break-word",
-          display: "-webkit-box",
-          "-webkit-line-clamp": "7",
-          "-webkit-box-orient": "vertical",
+          whiteSpace: 'normal',
+          wordWrap: 'break-word',
+          display: '-webkit-box',
+          '-webkit-line-clamp': '7',
+          '-webkit-box-orient': 'vertical',
         }}
       >
         {params.value}
@@ -110,6 +105,6 @@ const movieColumns: GridColDef[] = [
     width: 300,
     filterable: false,
   },
-];
+]
 
-export default movieColumns;
+export default movieColumns

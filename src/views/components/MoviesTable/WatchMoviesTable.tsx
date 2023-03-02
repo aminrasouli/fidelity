@@ -1,15 +1,15 @@
-import * as React from "react";
-import { useState } from "react";
-import storage from "../../../utils/storage";
-import { useManyMovies } from "../../../api/movies/movies";
-import { DataGrid } from "@mui/x-data-grid";
-import movieColumns from "./columns/movie.columns";
-import { SavedList } from "../../../api/libs/savedList";
+import * as React from 'react'
+import { useState } from 'react'
+import storage from '../../../utils/storage'
+import { useManyMovies } from '../../../api/movies/movies'
+import { DataGrid } from '@mui/x-data-grid'
+import movieColumns from './columns/movie.columns'
+import { SavedList } from '../../../api/libs/savedList'
 
 export default function WatchMoviesTable() {
-  const [movieIds, setMovieIds] = useState(storage.get(SavedList.Watch));
+  const [movieIds, setMovieIds] = useState(storage.get(SavedList.Watch))
 
-  const { data, isFetching, refetch } = useManyMovies({ movieIds });
+  const { data, isFetching, refetch } = useManyMovies({ movieIds })
 
   return (
     <DataGrid
@@ -20,10 +20,10 @@ export default function WatchMoviesTable() {
       rowHeight={185}
       onRowClick={(params) => {
         if (!storage.isInArray(SavedList.Watch, params.id)) {
-          setMovieIds(storage.get(SavedList.Watch));
-          refetch().then(() => {});
+          setMovieIds(storage.get(SavedList.Watch))
+          refetch().then()
         }
       }}
     />
-  );
+  )
 }
