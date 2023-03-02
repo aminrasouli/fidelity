@@ -1,42 +1,9 @@
-import { useQuery } from "react-query";
-import {
-  MoviesResponse,
-  MoviesResponseTransformed,
-  UseMovies,
-} from "./movies.types";
-import { parallelQueryFn } from "../libs/queryFn";
+import { QueryFunction, useQuery } from "react-query";
+import { UseMovies } from "./movies.types";
+import { parallelQueryFn, queryFn } from "../libs/queryFn";
+import { movieTransformer } from "../transform/movie.transformer";
 
-export const transformMovies = (
-  data: MoviesResponse
-): MoviesResponseTransformed => {
-  const items = data?.results?.map((item) => {
-    return {
-      id: item?.id,
-      title: item?.title,
-      poster: item?.poster_path
-        ? `https://image.tmdb.org/t/p/w200/${item?.poster_path}`
-        : "/assets/img/cover.jpg",
-      year: parseInt(item?.release_date?.split("-")?.[0]) || null,
-      date: item?.release_date,
-      overview: item?.overview,
-      lang: item?.original_language,
-      voteAverage: item?.vote_average,
-      voteCount: item?.vote_count,
-      popularity: item?.popularity,
-      adult: !!item?.adult,
-    };
-  });
-
-  const meta = {
-    page: data?.page,
-    totalCount: data?.total_results,
-    totalPage: data?.total_pages,
-  };
-
-  return { items, meta };
-};
-
-export function useMovies({ query, page = 1, ...params }: UseMovies) {
+export function useMovies({ query, page = 1 }: UseMovies) {
   const endpoint = "/search/movie";
   const queryParams = {
     query: query,
@@ -47,7 +14,8 @@ export function useMovies({ query, page = 1, ...params }: UseMovies) {
 
   return useQuery({
     queryKey: [endpoint, queryParams],
-    select: transformMovies,
+    select: movieTransformer,
+    queryFn: queryFn as QueryFunction<any, any>,
     keepPreviousData: !!query,
   });
 }
@@ -56,7 +24,37 @@ export function useManyMovies({ movieIds }: { movieIds: any }) {
   const endpoint = `movie`;
   return useQuery({
     queryKey: [endpoint, movieIds],
-    select: transformMovies,
+    select: movieTransformer,
     queryFn: parallelQueryFn,
+  });
+}
+
+export function useMovieImages({ movieId }: { movieId: any }) {
+  const endpoint = `/movie/${movieId}/images`;
+
+  return useQuery({
+    queryKey: [endpoint],
+    select: (data: any) => {
+      return (data?.posters ?? [])
+        .concat(data?.backdrops ?? [])
+        .map(
+          (item: any) => `https://image.tmdb.org/t/p/original${item?.file_path}`
+        );
+    },
+    queryFn: queryFn,
+  });
+}
+
+export function useMovieVideos({ movieId }: { movieId: any }) {
+  const endpoint = `/movie/${movieId}/videos`;
+
+  return useQuery({
+    queryKey: [endpoint],
+    select: (data) =>
+      data?.results
+        ?.filter?.((item: any) => item.key && item?.site === "YouTube")
+        ?.map?.((item: any) => `https://www.youtube.com/watch?v=${item.key}`) ??
+      [],
+    queryFn: queryFn,
   });
 }

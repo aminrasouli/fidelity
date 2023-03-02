@@ -6,7 +6,7 @@ const apiKey: string = `${process.env.REACT_APP_TMDB_API_KEY}`;
 
 const getFullEndpoint = (endpoint: string) => `${baseUrl}${endpoint}`;
 
-const queryFn = async ({ queryKey }: { queryKey: any }) => {
+export const queryFn = async ({ queryKey }: { queryKey: any }) => {
   const endpoint = queryKey[0];
   const params = queryKey[1];
 
@@ -41,5 +41,3 @@ export const parallelQueryFn = async ({
     results: (await Promise.all(promises)).map(({ data }) => data),
   };
 };
-
-export default queryFn;

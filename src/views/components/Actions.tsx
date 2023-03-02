@@ -1,11 +1,13 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Modal } from "@mui/material";
 import storage from "../../utils/storage";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SlideshowIcon from "@mui/icons-material/Slideshow";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { SavedList } from "../../api/libs/savedList";
+import ImagesModal from "./ImagesModal";
 
 export function Action({ title, movieId }: { title: string; movieId: number }) {
   const { enqueueSnackbar } = useSnackbar();
@@ -63,14 +65,29 @@ export function Action({ title, movieId }: { title: string; movieId: number }) {
         </Button>
       </Grid>
       <Grid item>
-        <Button
-          variant="outlined"
-          size="small"
-          color="info"
-          startIcon={<SlideshowIcon />}
-        >
-          Watch Trailer
-        </Button>
+        <Grid container spacing={1}>
+          <Grid item>
+            <Button
+              variant="outlined"
+              size="small"
+              color="info"
+              startIcon={<InsertPhotoIcon />}
+            >
+              Photos
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="outlined"
+              size="small"
+              color="primary"
+              startIcon={<SlideshowIcon />}
+            >
+              Trailer
+            </Button>
+          </Grid>
+          <ImagesModal />
+        </Grid>
       </Grid>
     </Grid>
   );
