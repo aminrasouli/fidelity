@@ -32,6 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "typecheck": "tsc --project tsconfig.json --pretty --noEmit",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc.json",
@@ -57,8 +58,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": ">=6",
-    "lint-staged": ">=10",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
     "prettier": "^2.8.4"
   },
   "description": "Millions of movies to discover. Explore now.",
@@ -66,7 +67,13 @@
   "author": "Amin Rasouli <ma.rasouli@digikala.com>",
   "license": "MIT",
   "lint-staged": {
-    "*.ts": "eslint --cache --fix",
+    "*.ts": [
+      "npm run typecheck --",
+      "eslint --cache --fix"
+    ],
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint --"
+    ],
     "*.--write": "prettier --write"
   }
 }
