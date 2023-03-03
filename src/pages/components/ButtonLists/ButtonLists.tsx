@@ -1,6 +1,7 @@
 import Grid from '@mui/material/Grid'
 import { Button, ButtonGroup, Chip } from '@mui/material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import Divider from '@mui/material/Divider'
 import Box from '@mui/material/Box'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import useSearchQueryParams from 'src/hooks/useSearchQueryParams'
@@ -42,12 +43,23 @@ export default function ButtonLists({
           <Chip variant='outlined' label={searchQuery} color='primary' onDelete={onBackClick} />
         </Box>
       )}
+      <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+        <Divider
+          sx={{
+            height: '10px',
+          }}
+        />
+      </Box>
       <ButtonGroup
         color='secondary'
         variant='outlined'
-        sx={{
-          height: '100%',
-        }}
+        sx={
+          hasSearchQuery
+            ? {}
+            : {
+                height: '100%',
+              }
+        }
       >
         <Button
           variant={buildVariantButton(routes.favorites.path)}
