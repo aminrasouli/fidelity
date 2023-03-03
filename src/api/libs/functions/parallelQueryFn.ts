@@ -28,7 +28,6 @@ export const parallelQueryFn = async ({ queryKey }: { queryKey: any }): Promise<
       ?.map((request: PromiseRejectedResult) => request?.reason?.message)
       ?.filter((message, index, self) => self.indexOf(message) === index)
       .join(', ')
-    console.log('wtf', errorsMessages)
     throw new Error(errorsMessages)
   }
 

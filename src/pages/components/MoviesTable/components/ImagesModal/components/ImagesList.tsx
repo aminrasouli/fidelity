@@ -7,8 +7,6 @@ import Box from '@mui/material/Box'
 export default function imagesList({ movieId }: { movieId: number }) {
   const { data } = useMovieImages({ movieId })
 
-  console.log(data)
-
   return (
     <>
       {data?.length === 0 && (
