@@ -29,7 +29,10 @@
       "error",
       "single"
     ],
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "@typescript-eslint/no-explicit-any": [
+      "off"
+    ]
   },
   "settings": {
     "react": {

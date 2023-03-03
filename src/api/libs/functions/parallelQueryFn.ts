@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { getFullEndpoint } from 'src/utils/url'
-import config from 'src/config'
+import main from 'src/config/main'
 
 export const parallelQueryFn = async ({ queryKey }: { queryKey: any }): Promise<any> => {
   const endpoint = queryKey[0]
@@ -11,7 +11,7 @@ export const parallelQueryFn = async ({ queryKey }: { queryKey: any }): Promise<
     promises.push(
       axios.get(`${getFullEndpoint(endpoint)}/${movieId}`, {
         params: {
-          api_key: config.API_KEY,
+          api_key: main.API_KEY,
         },
       }),
     )

@@ -1,6 +1,6 @@
 import { useContext, useLayoutEffect } from 'react'
-import { ThemeContext } from '../theme'
 import storage from '../utils/storage'
+import { ThemeContext } from '../context/themeContext'
 
 const useTheme = () => {
   const { isDark, setIsDark } = useContext(ThemeContext)

@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { getFullEndpoint } from 'src/utils/url'
-import config from 'src/config'
+import main from 'src/config/main'
 
 export const queryFn = async ({ queryKey }: { queryKey: any }) => {
   const endpoint = queryKey[0]
@@ -10,7 +10,7 @@ export const queryFn = async ({ queryKey }: { queryKey: any }) => {
     const { data } = await axios.get(getFullEndpoint(endpoint), {
       timeout: 5 * 1000,
       params: {
-        api_key: config.API_KEY,
+        api_key: main.API_KEY,
         ...params,
       },
     })
