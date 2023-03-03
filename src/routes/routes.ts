@@ -1,4 +1,4 @@
-import { RouteType } from 'src/views/components/RouteSwitcher'
+import { RouteType } from './components/RouteSwitcher'
 
 const routes: Record<string, RouteType> = {
   home: {

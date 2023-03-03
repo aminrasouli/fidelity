@@ -1,4 +1,4 @@
-export { useMovies } from './movies'
+export { useMovies, useManyMovies, useMovieVideos, useMovieImages } from './movies'
 export type {
   MoviesResponseResultTransformed,
   UseMovies,

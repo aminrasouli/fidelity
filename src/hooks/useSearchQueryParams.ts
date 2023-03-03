@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
-import routes from '../routes'
+import routes from 'src/routes'
 
 const useSearchQueryParams = (): {
   searchQuery: string

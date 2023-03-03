@@ -1,12 +1,12 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import SearchInput from 'src/views/components/SearchInput'
-import Copyright from 'src/views/layout/Copyright'
+import SearchInput from 'src/pages/components/SearchInput/SearchInput'
+import Copyright from 'src/theme/components/Copyright'
 import { useTheme } from 'src/hooks'
-import { Header } from 'src/views/layout/Header'
+import { Header } from 'src/theme/components/Header'
 import { ThemeSelectorButtons } from 'src/theme/components/ThemeSelector'
-import { ButtonLists } from 'src/views/components/ButtonLists'
-import BaseContainer from 'src/views/layout/BaseContainer'
+import ButtonLists from 'src/pages/components/ButtonLists'
+import BaseContainer from 'src/theme/layout/BaseContainer'
 
 const Home: () => JSX.Element = () => {
   const { isDark, handleThemeChange } = useTheme()
