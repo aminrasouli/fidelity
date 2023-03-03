@@ -1,27 +1,6 @@
-import axios, { AxiosError, AxiosResponse } from 'axios'
-
-const baseUrl = `${process.env.REACT_APP_TMDB_API_URL}`
-const apiKey = `${process.env.REACT_APP_TMDB_API_KEY}`
-
-const getFullEndpoint = (endpoint: string) => `${baseUrl}${endpoint}`
-
-export const queryFn = async ({ queryKey }: { queryKey: any }) => {
-  const endpoint = queryKey[0]
-  const params = queryKey[1]
-
-  try {
-    const { data } = await axios.get(getFullEndpoint(endpoint), {
-      timeout: 5 * 1000,
-      params: {
-        api_key: apiKey,
-        ...params,
-      },
-    })
-    return data
-  } catch (error: unknown) {
-    throw new Error((error as AxiosError).message)
-  }
-}
+import axios, { AxiosResponse } from 'axios'
+import { getFullEndpoint } from 'src/utils/url'
+import config from 'src/config'
 
 export const parallelQueryFn = async ({ queryKey }: { queryKey: any }): Promise<any> => {
   const endpoint = queryKey[0]
@@ -32,7 +11,7 @@ export const parallelQueryFn = async ({ queryKey }: { queryKey: any }): Promise<
     promises.push(
       axios.get(`${getFullEndpoint(endpoint)}/${movieId}`, {
         params: {
-          api_key: apiKey,
+          api_key: config.API_KEY,
         },
       }),
     )

@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import CloseIcon from '@mui/icons-material/Close'
 import { IconButton } from '@mui/material'
-import { useMovieVideos } from '../../api/movies/movies'
+import { useMovieVideos } from 'src/api/movies/movies'
 
 const style = {
   position: 'absolute' as const,

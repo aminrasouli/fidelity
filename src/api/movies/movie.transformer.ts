@@ -1,4 +1,4 @@
-import { MoviesResponse, MoviesResponseTransformed } from '../movies'
+import { MoviesResponse, MoviesResponseTransformed } from './index'
 
 export const movieTransformer = (data: MoviesResponse): MoviesResponseTransformed => {
   const items = data?.results?.map((item) => {

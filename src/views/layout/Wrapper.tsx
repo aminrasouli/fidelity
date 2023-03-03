@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from 'react'
 import Grid from '@mui/material/Grid'
 import { Header } from './Header'
 import Box from '@mui/material/Box'
-import { ButtonLists } from '../components/ButtonLists'
+import { ButtonLists } from 'src/views/components/ButtonLists'
 import Copyright from './Copyright'
 import BaseContainer from './BaseContainer'
 

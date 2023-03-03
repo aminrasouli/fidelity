@@ -6,9 +6,9 @@ import { BrowserRouter } from 'react-router-dom'
 import CssBaseline from '@mui/material/CssBaseline'
 import { useState } from 'react'
 import { QueryClientProvider } from 'react-query'
-import queryClient from './api/libs/queryClient'
+import queryClient from './api/libs/clients/queryClient'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import storage from './utils/storage'
+import storage from './utils/storage/storage'
 import { SnackbarProvider } from 'notistack'
 
 export default function App(): JSX.Element {

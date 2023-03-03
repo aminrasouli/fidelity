@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
-import { useMovieImages } from '../../api/movies/movies'
+import { useMovieImages } from 'src/api/movies/movies'
 import Box from '@mui/material/Box'
 
 export default function imagesList({ movieId }: { movieId: number }) {

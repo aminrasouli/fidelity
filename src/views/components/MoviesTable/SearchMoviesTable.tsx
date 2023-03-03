@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
-import { useMovies } from '../../../api/movies'
-import useSearchQueryParams from '../../../hooks/useSearchQueryParams'
+import { useMovies } from 'src/api/movies'
+import useSearchQueryParams from 'src/hooks/useSearchQueryParams'
 import movieColumns from './columns/movie.columns'
 
 export default function SearchMoviesTable() {

@@ -1,21 +1,21 @@
-import { RouteType } from '../views/components/RouteSwitcher'
+import { RouteType } from 'src/views/components/RouteSwitcher'
 
 const routes: Record<string, RouteType> = {
   home: {
     path: '/',
-    component: () => import('../pages/Home'),
+    component: () => import('src/pages/Home'),
   },
   search: {
     path: '/search',
-    component: () => import('../pages/Search'),
+    component: () => import('src/pages/Search'),
   },
   favorites: {
     path: '/favorites',
-    component: () => import('../pages/Favorites'),
+    component: () => import('src/pages/Favorites'),
   },
   watchLater: {
     path: '/watch-later',
-    component: () => import('../pages/WatchLater'),
+    component: () => import('src/pages/WatchLater'),
   },
 }
 

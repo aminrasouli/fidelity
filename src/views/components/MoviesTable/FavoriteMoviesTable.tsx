@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { useState } from 'react'
-import storage from '../../../utils/storage'
-import { useManyMovies } from '../../../api/movies/movies'
+import storage from 'src/utils/storage/storage'
+import { useManyMovies } from 'src/api/movies/movies'
 import { DataGrid } from '@mui/x-data-grid'
 import movieColumns from './columns/movie.columns'
-import { SavedList } from '../../../api/libs/savedList'
+import { SavedList } from 'src/utils/storage/enum/savedList'
 import { useSnackbar } from 'notistack'
 
 export default function FavoriteMoviesTable() {

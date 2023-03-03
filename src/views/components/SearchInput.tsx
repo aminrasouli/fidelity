@@ -2,8 +2,8 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import CircularProgress from '@mui/material/CircularProgress'
 import { FormEvent, useEffect, useState } from 'react'
-import { useDebounce, useSearchQueryParams } from '../../hooks'
-import { MoviesResponseResultTransformed, useMovies } from '../../api/movies'
+import { useDebounce, useSearchQueryParams } from 'src/hooks'
+import { MoviesResponseResultTransformed, useMovies } from 'src/api/movies'
 import { useSnackbar } from 'notistack'
 
 export default function SearchInput() {

@@ -3,8 +3,8 @@ import { Button, ButtonGroup, Chip } from '@mui/material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import Box from '@mui/material/Box'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import useSearchQueryParams from '../../hooks/useSearchQueryParams'
-import routes from '../../routes'
+import useSearchQueryParams from 'src/hooks/useSearchQueryParams'
+import routes from 'src/routes'
 
 export function ButtonLists({ showBackButton = false }: { showBackButton?: boolean }): JSX.Element {
   const navigate = useNavigate()

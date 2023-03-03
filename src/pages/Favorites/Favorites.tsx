@@ -1,5 +1,5 @@
-import FavoriteMoviesTable from '../../views/components/MoviesTable/FavoriteMoviesTable'
-import PageWrapper from '../../views/layout/PageWrapper'
+import FavoriteMoviesTable from 'src/views/components/MoviesTable/FavoriteMoviesTable'
+import PageWrapper from 'src/views/layout/PageWrapper'
 
 const WatchLater: () => JSX.Element = () => {
   return (

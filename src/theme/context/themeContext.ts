@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import storage from '../../utils/storage'
+import storage from 'src/utils/storage/storage'
 
 export const ThemeContext = createContext({
   isDark: storage.isEqual('theme', 'dark'),

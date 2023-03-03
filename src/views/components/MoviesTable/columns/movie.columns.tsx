@@ -1,12 +1,11 @@
-import { GridColDef } from '@mui/x-data-grid'
 import moment from 'moment/moment'
+import { GridColDef } from '@mui/x-data-grid'
 import { Grid } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { Action } from '../../Actions'
 import Typography from '@mui/material/Typography'
-import * as React from 'react'
-import StyledRating from '../components/StyledRating'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import { Action } from 'src/views/components/Actions'
+import StyledRating from 'src/views/components/MoviesTable/components/StyledRating'
 
 const movieColumns: GridColDef[] = [
   {

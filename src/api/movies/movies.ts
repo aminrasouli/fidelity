@@ -1,7 +1,8 @@
 import { QueryFunction, useQuery } from 'react-query'
 import { UseManyMovies, UseMovies } from './movies.types'
-import { parallelQueryFn, queryFn } from '../libs/queryFn'
-import { movieTransformer } from '../transform/movie.transformer'
+import { queryFn } from 'src/api/libs/functions/queryFn'
+import { parallelQueryFn } from 'src/api/libs/functions/parallelQueryFn'
+import { movieTransformer } from './movie.transformer'
 import { QueryObserverOptions } from 'react-query/types/core/types'
 
 export function useMovies({ query, page = 1, ...params }: UseMovies) {

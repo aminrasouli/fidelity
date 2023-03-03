@@ -1,5 +1,5 @@
-import SearchMoviesTable from '../../views/components/MoviesTable/SearchMoviesTable'
-import PageWrapper from '../../views/layout/PageWrapper'
+import SearchMoviesTable from 'src/views/components/MoviesTable/SearchMoviesTable'
+import PageWrapper from 'src/views/layout/PageWrapper'
 
 const Search: () => JSX.Element = () => {
   return (
