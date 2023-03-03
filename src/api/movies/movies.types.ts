@@ -5,6 +5,10 @@ export interface UseMovies extends QueryObserverOptions {
   page?: number
 }
 
+export interface UseManyMovies extends QueryObserverOptions {
+  movieIds: number[]
+}
+
 export interface MoviesResponseResult {
   id: number
   title: string

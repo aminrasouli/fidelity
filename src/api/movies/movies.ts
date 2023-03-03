@@ -1,9 +1,10 @@
 import { QueryFunction, useQuery } from 'react-query'
-import { UseMovies } from './movies.types'
+import { UseManyMovies, UseMovies } from './movies.types'
 import { parallelQueryFn, queryFn } from '../libs/queryFn'
 import { movieTransformer } from '../transform/movie.transformer'
+import { QueryObserverOptions } from 'react-query/types/core/types'
 
-export function useMovies({ query, page = 1 }: UseMovies) {
+export function useMovies({ query, page = 1, ...params }: UseMovies) {
   const endpoint = '/search/movie'
   const queryParams = {
     query: query,
@@ -17,19 +18,21 @@ export function useMovies({ query, page = 1 }: UseMovies) {
     select: movieTransformer,
     queryFn: queryFn as QueryFunction<any, any>,
     keepPreviousData: !!query,
+    ...(params as QueryObserverOptions<any, any>),
   })
 }
 
-export function useManyMovies({ movieIds }: { movieIds: any }) {
+export function useManyMovies({ movieIds, ...params }: UseManyMovies) {
   const endpoint = 'movie'
   return useQuery({
     queryKey: [endpoint, movieIds],
     select: movieTransformer,
     queryFn: parallelQueryFn,
+    ...(params as QueryObserverOptions<any, any>),
   })
 }
 
-export function useMovieImages({ movieId }: { movieId: any }) {
+export function useMovieImages({ movieId }: { movieId: number }) {
   const endpoint = `/movie/${movieId}/images`
 
   return useQuery({
@@ -43,7 +46,7 @@ export function useMovieImages({ movieId }: { movieId: any }) {
   })
 }
 
-export function useMovieVideos({ movieId }: { movieId: any }) {
+export function useMovieVideos({ movieId }: { movieId: number }) {
   const endpoint = `/movie/${movieId}/videos`
 
   return useQuery({

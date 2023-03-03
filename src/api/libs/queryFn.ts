@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { MoviesResponse } from '../movies'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 
 const baseUrl = `${process.env.REACT_APP_TMDB_API_URL}`
 const apiKey = `${process.env.REACT_APP_TMDB_API_KEY}`
@@ -10,20 +9,25 @@ export const queryFn = async ({ queryKey }: { queryKey: any }) => {
   const endpoint = queryKey[0]
   const params = queryKey[1]
 
-  const { data } = await axios.get(getFullEndpoint(endpoint), {
-    params: {
-      api_key: apiKey,
-      ...params,
-    },
-  })
-  return data
+  try {
+    const { data } = await axios.get(getFullEndpoint(endpoint), {
+      timeout: 5 * 1000,
+      params: {
+        api_key: apiKey,
+        ...params,
+      },
+    })
+    return data
+  } catch (error: unknown) {
+    throw new Error((error as AxiosError).message)
+  }
 }
 
-export const parallelQueryFn = async ({ queryKey }: { queryKey: any }): Promise<MoviesResponse> => {
+export const parallelQueryFn = async ({ queryKey }: { queryKey: any }): Promise<any> => {
   const endpoint = queryKey[0]
   const movieIds = queryKey[1]
 
-  const promises: any = []
+  const promises: Promise<AxiosResponse<any, any>>[] = []
   movieIds.forEach((movieId: number) => {
     promises.push(
       axios.get(`${getFullEndpoint(endpoint)}/${movieId}`, {
@@ -33,7 +37,25 @@ export const parallelQueryFn = async ({ queryKey }: { queryKey: any }): Promise<
       }),
     )
   })
+
+  const requests = await Promise.allSettled(promises)
+
+  const errors = requests.filter(
+    (request) => request.status === 'rejected',
+  ) as PromiseRejectedResult[]
+
+  if (errors.length) {
+    const errorsMessages = errors
+      ?.map((request: PromiseRejectedResult) => request?.reason?.message)
+      ?.filter((message, index, self) => self.indexOf(message) === index)
+      .join(', ')
+    console.log('wtf', errorsMessages)
+    throw new Error(errorsMessages)
+  }
+
   return {
-    results: (await Promise.all(promises)).map(({ data }) => data),
+    results: (
+      requests.filter((request) => request.status === 'fulfilled') as PromiseFulfilledResult<any>[]
+    ).map((request) => request.value?.data),
   }
 }

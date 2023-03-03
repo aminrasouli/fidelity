@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { FormEvent, useEffect, useState } from 'react'
 import { useDebounce, useSearchQueryParams } from '../../hooks'
 import { MoviesResponseResultTransformed, useMovies } from '../../api/movies'
+import { useSnackbar } from 'notistack'
 
 export default function SearchInput() {
   const { searchQuery, submitSearchQuery } = useSearchQueryParams()
@@ -11,13 +12,20 @@ export default function SearchInput() {
   const [inputValue, setInputValue] = useState('')
   const debouncedInputValue: string = useDebounce(inputValue, 450)
 
+  const { enqueueSnackbar } = useSnackbar()
+
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<readonly MoviesResponseResultTransformed[]>([])
+
   const isSubmittable: boolean =
     !!inputValue && inputValue !== searchQuery && inputValue.trim().length > 0
 
   const { data, isFetching } = useMovies({
     query: debouncedInputValue,
+    enabled: isSubmittable,
+    onError: (error: any) => {
+      enqueueSnackbar(error.message, { variant: 'error' })
+    },
   })
 
   const loading = open && isFetching

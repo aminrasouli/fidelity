@@ -5,11 +5,19 @@ import { useManyMovies } from '../../../api/movies/movies'
 import { DataGrid } from '@mui/x-data-grid'
 import movieColumns from './columns/movie.columns'
 import { SavedList } from '../../../api/libs/savedList'
+import { useSnackbar } from 'notistack'
 
 export default function FavoriteMoviesTable() {
   const [movieIds, setMovieIds] = useState(storage.get(SavedList.Favorite))
 
-  const { data, isFetching, refetch } = useManyMovies({ movieIds })
+  const { enqueueSnackbar } = useSnackbar()
+
+  const { data, isFetching, refetch } = useManyMovies({
+    movieIds,
+    onError: (error: any) => {
+      enqueueSnackbar(error?.message, { variant: 'error' })
+    },
+  })
 
   return (
     <DataGrid
