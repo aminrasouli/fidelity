@@ -9,6 +9,10 @@ export interface UseManyMovies extends QueryObserverOptions {
   movieIds: number[]
 }
 
+export interface UseSingleMovies extends QueryObserverOptions {
+  movieId: number
+}
+
 export interface MoviesResponseResult {
   id: number
   title: string

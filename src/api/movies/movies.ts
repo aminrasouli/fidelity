@@ -1,5 +1,5 @@
 import { QueryFunction, useQuery } from 'react-query'
-import { UseManyMovies, UseMovies } from './movies.types'
+import { UseManyMovies, UseMovies, UseSingleMovies } from './movies.types'
 import { queryFn } from 'src/api/libs/functions/queryFn'
 import { parallelQueryFn } from 'src/api/libs/functions/parallelQueryFn'
 import { movieTransformer } from './movie.transformer'
@@ -33,7 +33,7 @@ export function useManyMovies({ movieIds, ...params }: UseManyMovies) {
   })
 }
 
-export function useMovieImages({ movieId }: { movieId: number }) {
+export function useMovieImages({ movieId, ...params }: UseSingleMovies) {
   const endpoint = `/movie/${movieId}/images`
 
   return useQuery({
@@ -44,10 +44,11 @@ export function useMovieImages({ movieId }: { movieId: number }) {
         .map((item: any) => `https://image.tmdb.org/t/p/original${item?.file_path}`)
     },
     queryFn: queryFn,
+    ...(params as QueryObserverOptions<any, any>),
   })
 }
 
-export function useMovieVideos({ movieId }: { movieId: number }) {
+export function useMovieVideos({ movieId, ...params }: UseSingleMovies) {
   const endpoint = `/movie/${movieId}/videos`
 
   return useQuery({
@@ -57,5 +58,6 @@ export function useMovieVideos({ movieId }: { movieId: number }) {
         ?.filter?.((item: any) => item.key && item?.site === 'YouTube')
         ?.map?.((item: any) => `https://www.youtube.com/watch?v=${item.key}`) ?? [],
     queryFn: queryFn,
+    ...(params as QueryObserverOptions<any, any>),
   })
 }

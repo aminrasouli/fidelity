@@ -50,7 +50,8 @@ export default function SearchInput() {
       }}
     >
       <Autocomplete
-        id='asynchronous-demo'
+        id='search-movies'
+        autoComplete
         sx={{ width: '35vw', minWidth: '350px' }}
         open={open}
         onOpen={() => setOpen(true)}
@@ -64,7 +65,10 @@ export default function SearchInput() {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue)
         }}
-        onChange={(e, value) => submitSearchQuery((value as MoviesResponseResultTransformed).title)}
+        onChange={async (e, value) => {
+          await setOpen(false)
+          submitSearchQuery((value as MoviesResponseResultTransformed).title)
+        }}
         renderInput={(params) => (
           <TextField
             {...params}
