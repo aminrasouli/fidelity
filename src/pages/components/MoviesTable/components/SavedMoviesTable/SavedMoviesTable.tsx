@@ -8,12 +8,13 @@ import { SavedListEnum } from 'src/hooks/useSavedList'
 import { useSnackbar } from 'notistack'
 
 export default function SavedMoviesTable({ savedList }: { savedList: SavedListEnum }) {
-  const [movieIds, setMovieIds] = useState(storage.get(savedList))
+  const [movieIds, setMovieIds] = useState(storage.get(savedList) ?? [])
 
   const { enqueueSnackbar } = useSnackbar()
 
   const { data, isFetching, refetch } = useManyMovies({
     movieIds,
+    enabled: movieIds.length > 0,
     onError: (error: any) => {
       enqueueSnackbar(error?.message, { variant: 'error' })
     },
