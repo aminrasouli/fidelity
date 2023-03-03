@@ -1,14 +1,13 @@
 import { Button } from '@mui/material'
-import { SavedListEnum } from 'src/hooks/useSavedList'
+import { getTitleBySavedList, SavedListEnum } from 'src/hooks/useSavedList'
 import useSavedList from 'src/hooks/useSavedList/useSavedList'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
 export default function FavoriteButton({ title, movieId }: { title: string; movieId: number }) {
-  const name = 'Favorite'
+  const savedList = SavedListEnum.Favorite
 
   const [watch, handleWatchClick] = useSavedList({
     savedList: SavedListEnum.Favorite,
-    savedListName: name,
     movieTitle: title,
     movieId: movieId,
   })
@@ -22,7 +21,7 @@ export default function FavoriteButton({ title, movieId }: { title: string; movi
       startIcon={<FavoriteIcon />}
     >
       {!watch ? 'Add' : 'Remove'}
-      {` ${name}`}
+      {` ${getTitleBySavedList(savedList)}`}
     </Button>
   )
 }

@@ -1,14 +1,13 @@
 import { Button } from '@mui/material'
-import { SavedListEnum } from 'src/hooks/useSavedList'
+import { getTitleBySavedList, SavedListEnum } from 'src/hooks/useSavedList'
 import useSavedList from 'src/hooks/useSavedList/useSavedList'
 import WatchLaterIcon from '@mui/icons-material/WatchLater'
 
 export default function WatchLaterButton({ title, movieId }: { title: string; movieId: number }) {
-  const name = 'Watch Later'
+  const savedList = SavedListEnum.Watch
 
   const [watch, handleWatchClick] = useSavedList({
-    savedList: SavedListEnum.Watch,
-    savedListName: name,
+    savedList,
     movieTitle: title,
     movieId: movieId,
   })
@@ -22,7 +21,7 @@ export default function WatchLaterButton({ title, movieId }: { title: string; mo
       startIcon={<WatchLaterIcon />}
     >
       {!watch ? 'Add' : 'Remove'}
-      {` ${name}`}
+      {` ${getTitleBySavedList(savedList)}`}
     </Button>
   )
 }
