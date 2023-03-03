@@ -1,6 +1,5 @@
 import { Button } from '@mui/material'
-import { getTitleBySavedList, SavedListEnum } from 'src/hooks/useSavedList'
-import useSavedList from 'src/hooks/useSavedList/useSavedList'
+import useSavedList, { getTitleBySavedList, SavedListEnum } from 'src/hooks/useSavedList'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
 export default function FavoriteButton({ title, movieId }: { title: string; movieId: number }) {

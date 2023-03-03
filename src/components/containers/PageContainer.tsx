@@ -1,9 +1,9 @@
 import { FC, PropsWithChildren } from 'react'
 import Grid from '@mui/material/Grid'
-import { Header } from '../layout/Header'
+import { Header } from 'src/components/layout/Header'
 import Box from '@mui/material/Box'
 import ButtonLists from 'src/components/shared/ButtonLists'
-import Footer from '../layout/Footer'
+import Footer from 'src/components/layout/Footer'
 import BaseContainer from './BaseContainer'
 
 const PageContainer: FC<PropsWithChildren> = ({ children }) => {

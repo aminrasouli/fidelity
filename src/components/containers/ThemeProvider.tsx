@@ -1,6 +1,6 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import { FC, PropsWithChildren, useState } from 'react'
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
 import { ThemeContext } from 'src/context/themeContext'
 import storage from 'src/utils/storage'
 import { PaletteMode } from '@mui/material'
@@ -15,17 +15,19 @@ const buildThemeByMode: (mode: PaletteMode) => Theme = (mode: PaletteMode) =>
 const getTheme: (isDarkMode: boolean) => Theme = (isDarkMode: boolean) =>
   buildThemeByMode(isDarkMode ? 'dark' : 'light')
 
-const CustomThemeProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [isDark, setIsDark] = useState<boolean>(storage.isEqual('theme', 'dark'))
+const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
+  const [isDark, setIsDark] = useState<boolean>(() => storage.isEqual('theme', 'dark'))
+
+  useEffect(() => storage.set('theme', isDark ? 'dark' : 'light'), [isDark])
 
   return (
     <ThemeContext.Provider value={{ isDark, setIsDark }}>
-      <ThemeProvider theme={getTheme(isDark)}>
+      <MuiThemeProvider theme={getTheme(isDark)}>
         <CssBaseline />
         {children}
-      </ThemeProvider>
+      </MuiThemeProvider>
     </ThemeContext.Provider>
   )
 }
 
-export default CustomThemeProvider
+export default ThemeProvider

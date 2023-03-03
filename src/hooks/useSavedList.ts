@@ -1,8 +1,20 @@
-import { SavedListEnum } from 'src/hooks/useSavedList'
 import { useState } from 'react'
 import storage from 'src/utils/storage'
 import { useSnackbar } from 'notistack'
-import { getTitleBySavedList } from './enum/savedList.enum'
+
+export enum SavedListEnum {
+  Watch = 'watch',
+  Favorite = 'favorite',
+}
+
+export const getTitleBySavedList = (savedList: SavedListEnum): string => {
+  const items = {
+    [SavedListEnum.Watch]: 'Watch Later',
+    [SavedListEnum.Favorite]: 'Favorites',
+  }
+
+  return items[savedList] ?? 'Unknown List'
+}
 
 const useSavedList = ({
   savedList,

@@ -1,9 +1,14 @@
-import { createContext } from 'react'
+import { createContext, Dispatch, SetStateAction } from 'react'
 import storage from 'src/utils/storage'
 
-export const ThemeContext = createContext({
+type ThemeContextType = {
+  isDark: boolean
+  setIsDark: Dispatch<SetStateAction<boolean>>
+}
+
+export const ThemeContext = createContext<ThemeContextType>({
   isDark: storage.isEqual('theme', 'dark'),
-  setIsDark: (isDark: boolean) => {
-    storage.set('theme', isDark ? 'dark' : 'light')
+  setIsDark: () => {
+    //
   },
 })
