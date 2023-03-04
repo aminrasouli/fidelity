@@ -4,7 +4,7 @@ import { useMovies } from 'src/api/movies'
 import useSearchQueryParams from 'src/hooks/useSearchQueryParams'
 import movieColumns from './columns/movie.columns'
 
-export default function SearchMoviesTable() {
+const SearchMoviesTable = () => {
   const { searchQuery } = useSearchQueryParams()
 
   const [page, setPage] = useState<number>(0)
@@ -40,3 +40,4 @@ export default function SearchMoviesTable() {
     />
   )
 }
+export default SearchMoviesTable

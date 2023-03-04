@@ -7,7 +7,7 @@ import { getTitleBySavedList, SavedListEnum } from 'src/hooks/useSavedList'
 import { useSnackbar } from 'notistack'
 import { Stack } from '@mui/material'
 
-export default function SavedMoviesTable({ savedList }: { savedList: SavedListEnum }) {
+const SavedMoviesTable = ({ savedList }: { savedList: SavedListEnum }) => {
   const [movieIds, setMovieIds] = useState(storage.get(savedList) ?? [])
 
   const { enqueueSnackbar } = useSnackbar()
@@ -42,3 +42,4 @@ export default function SavedMoviesTable({ savedList }: { savedList: SavedListEn
     />
   )
 }
+export default SavedMoviesTable

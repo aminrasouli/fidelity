@@ -6,7 +6,7 @@ import { useDebounce, useSearchQueryParams } from 'src/hooks'
 import { MoviesResponseResultTransformed, useMovies } from 'src/api/movies'
 import { useSnackbar } from 'notistack'
 
-export default function SearchInput() {
+const SearchInput = () => {
   const { searchQuery, submitSearchQuery } = useSearchQueryParams()
 
   const [inputValue, setInputValue] = useState<string>('')
@@ -89,3 +89,4 @@ export default function SearchInput() {
     </form>
   )
 }
+export default SearchInput

@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import { SearchMoviesTable } from 'src/components/MoviesTable'
 import PageContainer from 'src/components/containers/PageContainer'
 
-const Search: () => JSX.Element = () => {
+const Search: FC = () => {
   return (
     <PageContainer>
       <SearchMoviesTable />

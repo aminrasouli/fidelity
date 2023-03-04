@@ -4,7 +4,7 @@ import VideosModal from '../../VideosModal/VideosModal'
 import { useState } from 'react'
 import { useMovieVideos } from 'src/api/movies'
 
-export default function VideoButton({ movieId }: { movieId: number }) {
+const VideoButton = ({ movieId }: { movieId: number }) => {
   const [openVideoModal, setOpenVideoModal] = useState(false)
 
   const { data } = useMovieVideos({ movieId })
@@ -35,3 +35,4 @@ export default function VideoButton({ movieId }: { movieId: number }) {
     </>
   )
 }
+export default VideoButton

@@ -16,7 +16,7 @@ const style = {
   p: 4,
 }
 
-export default function ImagesModal({
+const ImagesModal = ({
   movieId,
   open,
   setOpen,
@@ -24,7 +24,7 @@ export default function ImagesModal({
   movieId: number
   open: boolean
   setOpen: (open: boolean) => void
-}) {
+}) => {
   const handleClose = () => setOpen(false)
 
   return (
@@ -45,3 +45,4 @@ export default function ImagesModal({
     </div>
   )
 }
+export default ImagesModal

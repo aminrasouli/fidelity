@@ -5,7 +5,7 @@ import { parallelQueryFn } from 'src/api/utils/parallelQueryFn'
 import { movieTransformer } from './movie.transformer'
 import { QueryObserverOptions } from 'react-query/types/core/types'
 
-export function useMovies({ query, page = 1, ...params }: UseMovies) {
+export const useMovies = ({ query, page = 1, ...params }: UseMovies) => {
   const endpoint = '/search/movie'
   const queryParams = {
     query: query,
@@ -23,7 +23,7 @@ export function useMovies({ query, page = 1, ...params }: UseMovies) {
   })
 }
 
-export function useManyMovies({ movieIds, ...params }: UseManyMovies) {
+export const useManyMovies = ({ movieIds, ...params }: UseManyMovies) => {
   const endpoint = 'movie'
   return useQuery({
     queryKey: [endpoint, movieIds],
@@ -33,7 +33,7 @@ export function useManyMovies({ movieIds, ...params }: UseManyMovies) {
   })
 }
 
-export function useMovieImages({ movieId, ...params }: UseSingleMovies) {
+export const useMovieImages = ({ movieId, ...params }: UseSingleMovies) => {
   const endpoint = `/movie/${movieId}/images`
 
   return useQuery({
@@ -48,7 +48,7 @@ export function useMovieImages({ movieId, ...params }: UseSingleMovies) {
   })
 }
 
-export function useMovieVideos({ movieId, ...params }: UseSingleMovies) {
+export const useMovieVideos = ({ movieId, ...params }: UseSingleMovies) => {
   const endpoint = `/movie/${movieId}/videos`
 
   return useQuery({

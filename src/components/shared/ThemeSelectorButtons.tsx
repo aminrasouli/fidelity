@@ -1,8 +1,9 @@
+import { FC } from 'react'
 import Grid from '@mui/material/Grid'
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { useTheme } from 'src/hooks'
 
-export function ThemeSelectorButtons(): JSX.Element {
+export const ThemeSelectorButtons: FC = () => {
   const { isDark, setIsDark } = useTheme()
 
   return (

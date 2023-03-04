@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import { useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-export default function imagesList({ movieId }: { movieId: number }) {
+const imagesList = ({ movieId }: { movieId: number }) => {
   const { data } = useMovieImages({ movieId })
 
   const theme = useTheme()
@@ -34,3 +34,4 @@ export default function imagesList({ movieId }: { movieId: number }) {
     </>
   )
 }
+export default imagesList

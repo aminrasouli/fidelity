@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import SearchInput from 'src/components/shared/SearchInput'
@@ -7,7 +8,7 @@ import { ThemeSelectorButtons } from 'src/components/shared/ThemeSelectorButtons
 import ButtonLists from 'src/components/shared/ButtonLists'
 import BaseContainer from 'src/components/containers/BaseContainer'
 
-const Home: () => JSX.Element = () => {
+const Home: FC = () => {
   return (
     <BaseContainer>
       <Header />

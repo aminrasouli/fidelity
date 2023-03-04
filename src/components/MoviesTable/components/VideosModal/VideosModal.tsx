@@ -19,7 +19,7 @@ const style = {
   px: 2.5,
 }
 
-export default function VideosModal({
+const VideosModal = ({
   movieId,
   open,
   setOpen,
@@ -27,7 +27,7 @@ export default function VideosModal({
   movieId: number
   open: boolean
   setOpen: (open: boolean) => void
-}) {
+}) => {
   const { data } = useMovieVideos({ movieId })
 
   const handleClose = () => setOpen(false)
@@ -58,3 +58,4 @@ export default function VideosModal({
     </Modal>
   )
 }
+export default VideosModal

@@ -1,7 +1,8 @@
 import { FavoriteMoviesTable } from 'src/components/MoviesTable'
 import PageContainer from 'src/components/containers/PageContainer'
+import { FC } from 'react'
 
-const WatchLater: () => JSX.Element = () => {
+const Favorites: FC = () => {
   return (
     <PageContainer>
       <FavoriteMoviesTable />
@@ -9,4 +10,4 @@ const WatchLater: () => JSX.Element = () => {
   )
 }
 
-export default WatchLater
+export default Favorites

@@ -3,7 +3,7 @@ import { Button, Grid } from '@mui/material'
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto'
 import ImagesModal from '../../ImagesModal/ImagesModal'
 
-export default function ImageButton({ movieId }: { movieId: number }) {
+const ImageButton = ({ movieId }: { movieId: number }) => {
   const [openImageModel, setOpenImageModel] = useState(false)
 
   return (
@@ -29,3 +29,4 @@ export default function ImageButton({ movieId }: { movieId: number }) {
     </>
   )
 }
+export default ImageButton

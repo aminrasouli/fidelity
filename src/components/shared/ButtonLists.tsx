@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import Grid from '@mui/material/Grid'
 import { Button, ButtonGroup, Chip } from '@mui/material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
@@ -7,11 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import useSearchQueryParams from 'src/hooks/useSearchQueryParams'
 import routes from 'src/routes'
 
-export default function ButtonLists({
-  showBackButton = false,
-}: {
-  showBackButton?: boolean
-}): JSX.Element {
+const ButtonLists: FC<{ showBackButton?: boolean }> = ({ showBackButton = false }) => {
   const navigate = useNavigate()
   const location = useLocation()
   const { searchQuery, hasSearchQuery } = useSearchQueryParams()
@@ -79,3 +76,4 @@ export default function ButtonLists({
     </Grid>
   )
 }
+export default ButtonLists

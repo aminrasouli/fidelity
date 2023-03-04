@@ -1,6 +1,5 @@
 import { SavedListEnum } from 'src/hooks/useSavedList'
 import { SavedMoviesTable } from 'src/components/MoviesTable/components/SavedMoviesTable'
 
-export default function FavoriteMoviesTable() {
-  return <SavedMoviesTable savedList={SavedListEnum.Favorite} />
-}
+const FavoriteMoviesTable = () => <SavedMoviesTable savedList={SavedListEnum.Favorite} />
+export default FavoriteMoviesTable

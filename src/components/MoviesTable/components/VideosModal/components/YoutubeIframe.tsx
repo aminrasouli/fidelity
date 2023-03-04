@@ -37,7 +37,7 @@ const VideoIframe: React.FC<VideoIframeProps> = ({ url }) => {
         : 1.85
     const height = iframeRef.current ? iframeRef.current.offsetWidth * 0.5625 : defaultHeight
     setVideoHeight(Math.floor(height * ratio))
-    return function cleanup() {
+    return () => {
       window.removeEventListener('resize', handleChangeVideoWidth)
     }
   }, [videoHeight, handleChangeVideoWidth])
