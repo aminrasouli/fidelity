@@ -12,7 +12,7 @@ const movieColumns: GridColDef[] = [
     field: 'poster',
     headerName: 'Poster',
     sortable: false,
-    width: 100,
+    width: 105,
     renderCell: (params) => (
       <img src={`${params.value}`} width='85px' loading='lazy' alt={params.row.title} />
     ),
