@@ -31,15 +31,15 @@ const SearchInput = () => {
   const loading = open && isFetching
 
   useEffect(() => {
-    const topFilms = data?.items || []
-    setOptions([...topFilms])
-  }, [loading, data])
-
-  useEffect(() => {
     if (!open) {
       setOptions([])
     }
-  }, [open, debouncedInputValue])
+  }, [open])
+
+  useEffect(() => {
+    const topFilms = data?.items || []
+    setOptions([...topFilms])
+  }, [loading, data])
 
   return (
     <form
@@ -51,12 +51,13 @@ const SearchInput = () => {
     >
       <Autocomplete
         id='search-movies'
+        data-testid='search-movies'
         autoComplete
         sx={{ width: '35vw', minWidth: '350px' }}
         open={open}
         onOpen={() => setOpen(true)}
         onClose={() => setOpen(false)}
-        isOptionEqualToValue={(option, value) => option.title === value.title}
+        isOptionEqualToValue={(option, value) => option.title.includes(value.title)}
         getOptionLabel={(option) => {
           return option?.year ? `${option?.title} (${option?.year})` : `${option?.title})`
         }}
@@ -65,9 +66,18 @@ const SearchInput = () => {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue)
         }}
-        onChange={async (e, value) => {
-          await setOpen(false)
+        onChange={(e, value) => {
+          setOpen(false)
           submitSearchQuery((value as MoviesResponseResultTransformed).title)
+        }}
+        componentsProps={{
+          popper: {
+            componentsProps: {
+              root: {
+                'data-testid': 'search-movies-listbox',
+              } as unknown as any,
+            },
+          },
         }}
         renderInput={(params) => (
           <TextField

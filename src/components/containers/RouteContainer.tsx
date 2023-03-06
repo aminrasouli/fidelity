@@ -1,6 +1,6 @@
 import React, { ComponentType, FC, lazy, Suspense } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { Loading } from 'src/components/shared/Loading'
+import Loading from 'src/components/shared/Loading'
 import { RouteType } from 'src/routes'
 
 export interface RouteSwitcherProps extends React.HTMLAttributes<HTMLDivElement> {
