@@ -1,8 +1,27 @@
 # Fidelity (LeoVegas - Coding Challenge)
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the LeoVegas Technical Challenge GitHub repository! This repository contains the code for the technical challenge of LeoVegas company. The challenge was implemented using React and Material UI. also some tests are written with the Jest and React testing libraries
+
+## Demo
+You can view the demo here:
+<br>
+[leo-fidelity.netlify.app](https://leo-fidelity.netlify.app/)
+
+## Screenshots
+![photo_2023-03-07_00-14-18](https://user-images.githubusercontent.com/8999374/223227071-f067dca5-6b51-4d9e-b03a-52f41feb00f6.jpg)
+![photo_2023-03-07_00-14-29](https://user-images.githubusercontent.com/8999374/223227064-d6db66b0-5d29-4b23-8581-67c3b942a925.jpg)
+
+## Main Libraries
+- Material UI
+- React router dom
+- React Query
+- Axios
+- Jest
+- Testing library
+
+
 
 ## Available Scripts
-
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 In the project directory, you can run:
 
 ### `yarn start`
